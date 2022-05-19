@@ -8,7 +8,7 @@ import jsonpickle
 from module.module.src.integration import run_build_model
 
 from teo.teo_pb2 import BuildModelInput, BuildModelOutput
-from teo.teo_pb2_grpc import TEOModuleServicer
+from teo.teo_pb2_grpc import TEOModuleServicer, add_TEOModuleServicer_to_server
 
 
 
@@ -31,3 +31,20 @@ class TEOModule(TEOModuleServicer):
       return BuildModelOutput(
         output = jsonpickle.encode(result, unpicklable=True)
       )
+
+def serve():
+    server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
+    add_TEOModuleServicer_to_server(TEOModule(), server)
+
+    server.add_insecure_port(
+        f"{os.getenv('GRPC_HOST')}:{os.getenv('GRPC_PORT')}")
+
+    print(
+        f"TEO module Listening at {os.getenv('GRPC_HOST')}:{os.getenv('GRPC_PORT')}")
+
+    server.start()
+    server.wait_for_termination()
+
+
+if __name__ == '__main__':
+    serve()

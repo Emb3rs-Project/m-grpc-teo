@@ -1,4 +1,4 @@
-LIBSPATH=ms_grpc/plibs
+LIBSPATH=ms-grpc/plibs
 
 if [ $# -eq 0 ]
   then
@@ -6,4 +6,6 @@ if [ $# -eq 0 ]
     exit
 fi
 
-PYTHONPATH=$PYTHONPATH:$LIBSPATH python $1
+export PYTHONPATH=ms_grpc/plibs 
+
+python $1
