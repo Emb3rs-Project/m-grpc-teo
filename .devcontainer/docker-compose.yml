@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  teo:
+    build: 
+      context: ..
+      dockerfile: .devcontainer/Dockerfile
+      args:
+        - NODE_VERSION=none
+    image: embers/m-grpc-teo
+    volumes:
+      - ..:/workspaces/m-grpc-teo
+
+    command: sleep infinity
+
+    networks:
+      - embers
+    
+networks:
+    embers:
+        driver: bridge
