@@ -4,6 +4,7 @@ from concurrent import futures
 import dotenv
 import grpc
 import jsonpickle
+import json
 
 from teo.teo_pb2 import BuildModelInput, BuildModelOutput
 from teo.teo_pb2_grpc import TEOModuleServicer, add_TEOModuleServicer_to_server
@@ -18,7 +19,7 @@ class TEOModule(TEOModuleServicer):
 
   def __init__(self) -> None:
       pass
-
+ 
   def buildmodel(self, request : BuildModelInput, context) -> BuildModelOutput:
       input_dict = {
         "platform" : jsonpickle.decode(request.platform),
@@ -28,7 +29,21 @@ class TEOModule(TEOModuleServicer):
       result = run_build_model(input_data=input_dict)
 
       return BuildModelOutput(
-        output = jsonpickle.encode(result, unpicklable=True)
+        Cost = json.dumps(result["Cost"]),
+        AccumulatedNewCapacity = json.dumps(result["AccumulatedNewCapacity"]),
+        AccumulatedNewStorageCapacity = json.dumps(result["AccumulatedNewStorageCapacity"]),
+        AnnualTechnologyEmission = json.dumps(result["AnnualTechnologyEmission"]),
+        ProductionByTechnology = json.dumps(result["ProductionByTechnology"]),
+        StorageLevelTimesliceStart = json.dumps(result["StorageLevelTimesliceStart"]),
+        TotalEmissions = json.dumps(result["TotalEmissions"]),
+        DiscountedCapitalInvestmentByTechnology = json.dumps(result["DiscountedCapitalInvestmentByTechnology"]),
+        DiscountedCapitalInvestmentByStorage = json.dumps(result["DiscountedCapitalInvestmentByStorage"]),
+        DiscountedSalvageValueByTechnology = json.dumps(result["DiscountedSalvageValueByTechnology"]),
+        DiscountedSalvageValueByStorage = json.dumps(result["DiscountedSalvageValueByStorage"]),
+        TotalDiscountedFixedOperatingCost = json.dumps(result["TotalDiscountedFixedOperatingCost"]),
+        VariableOMCost = json.dumps(result["VariableOMCost"]),
+        ex_capacities = json.dumps(result["ex_capacities"]),
+        report = result["report"],
       )
 
 def serve():
