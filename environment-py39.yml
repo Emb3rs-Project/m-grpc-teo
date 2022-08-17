@@ -1,5 +1,4 @@
-name: base
-prefix: /opt/conda
+name: teo-grpc-module
 channels:
   - conda-forge
   - defaults
