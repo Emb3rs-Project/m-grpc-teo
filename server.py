@@ -28,7 +28,6 @@ class TEOModule(TEOModuleServicer):
             AnnualTechnologyEmission=json.dumps(result["AnnualTechnologyEmission"]),
             ProductionByTechnology=json.dumps(result["ProductionByTechnology"]),
             StorageLevelTimesliceStart=json.dumps(result["StorageLevelTimesliceStart"]),
-            UseByTechnology=json.dumps(result["UseByTechnology"]),
             TotalEmissions=json.dumps(result["TotalEmissions"]),
             DiscountedCapitalInvestmentByTechnology=json.dumps(result["DiscountedCapitalInvestmentByTechnology"]),
             DiscountedCapitalInvestmentByStorage=json.dumps(result["DiscountedCapitalInvestmentByStorage"]),
