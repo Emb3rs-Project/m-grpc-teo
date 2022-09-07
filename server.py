@@ -42,7 +42,10 @@ class TEOModule(TEOModuleServicer):
 
 
 def serve():
-    server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
+    server = grpc.server(
+        futures.ThreadPoolExecutor(max_workers=10),
+        options=[('grpc.max_send_message_length', -1), ('grpc.max_receive_message_length', -1)],
+    )
     add_TEOModuleServicer_to_server(TEOModule(), server)
 
     server.add_insecure_port(f"{os.getenv('GRPC_HOST')}:{os.getenv('GRPC_PORT')}")
