@@ -15,6 +15,7 @@ dependencies:
   - jinja2=3.0.3
   - flask=2.1.2
   - pandas=1.4.1
+  - pyscipopt=4.2.0
   - pip:
     - grpcio==1.44.0
     - protobuf==3.20.1
