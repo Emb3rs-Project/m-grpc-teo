@@ -13,6 +13,14 @@ RUN conda-pack -n teo-grpc-module -o /tmp/env.tar && \
     mkdir /venv && cd /venv && tar xf /tmp/env.tar && \
     rm /tmp/env.tar
 
+# Add HiGHS Executable
+ENV HIGHS_VERSION=1.3.0
+ENV JULIA_BINARY_PATH="https://github.com/JuliaBinaryWrappers/HiGHSstatic_jll.jl/releases/download"
+ENV HIGHS_BINARY="HiGHSstatic-v$HIGHS_VERSION%2B0/HiGHSstatic.v${HIGHS_VERSION}.x86_64-linux-gnu-cxx11.tar.gz"
+ENV HIGHS_URL="$JULIA_BINARY_PATH/$HIGHS_BINARY"
+
+RUN wget -c $HIGHS_URL -O - | tar -xz -C /venv/.
+
 # We've put venv in same path it'll be in final image,
 # so now fix up paths:
 RUN /venv/bin/conda-unpack
