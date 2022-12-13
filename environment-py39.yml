@@ -30,7 +30,7 @@ dependencies:
     - python-dotenv==0.20.0
     - amply==0.1.4
     - docutils==0.17.1
-#    - pulp==2.6.0
-    - git+https://github.com/coin-or/pulp
+    - pulp==2.7.0
     - gurobipy==9.5.1
     - highspy
+    - coptpy
