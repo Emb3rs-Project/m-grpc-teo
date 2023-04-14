@@ -5,25 +5,25 @@ channels:
 dependencies:
   - python=3.9
   - pip=
-  - urllib3=
-  - beautifulsoup4=
-  - matplotlib=
-  - requests=
-  - pydantic=
-  - jinja2=
-  - jsonpickle=
-  - numpy-base=
-  - numexpr=
-  - openpyxl=
-  - pandas=
-  - pickleshare=
-  - plotly=
-  - prompt-toolkit=
-  - ptyprocess=
-  - pygments=
-  - pyzmq=
-  - xlrd=
-  - pyscipopt=4.2.0
+  - urllib3=1.*
+  - beautifulsoup4=4.*
+  - matplotlib=3.*
+  - requests=2.*
+  - pydantic=1.*
+  - jinja2=3.*
+  - jsonpickle=3.*
+  - numpy-base=1.*
+  - numexpr=2.*
+  - openpyxl=3.*
+  - pandas=1.*
+  - pickleshare=0.*
+  - plotly=5.*
+  - prompt-toolkit=3.*
+  - ptyprocess=0.*
+  - pygments=2.*
+  - pyzmq=25.*
+  - xlrd=2.*
+  - pyscipopt=4.2.*
   - pip:
     - grpcio==1.44.0
     - protobuf==3.20.1
@@ -32,5 +32,5 @@ dependencies:
     - docutils==0.17.1
     - pulp==2.7.0
     - gurobipy==9.5.1
-    - highspy
-    - coptpy
+    - highspy>=1.0,<2.0
+    - coptpy>=6.0,<7.0
