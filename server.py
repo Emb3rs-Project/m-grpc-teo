@@ -13,7 +13,7 @@ from teo.teo_pb2_grpc import TEOModuleServicer, add_TEOModuleServicer_to_server
 from module.module.src.integration import run_build_model
 
 dotenv.load_dotenv()
-PROJECT_PATH = str(Path.cwd().parent)
+PROJECT_PATH = str(Path.cwd())
 
 
 class TEOModule(TEOModuleServicer):
