@@ -1,16 +1,19 @@
 import json
 import os
 from concurrent import futures
+from pathlib import Path
 
 import dotenv
 import grpc
 import jsonpickle
 
+from base.wrappers import SimulationWrapper
 from teo.teo_pb2 import BuildModelInput, BuildModelOutput
 from teo.teo_pb2_grpc import TEOModuleServicer, add_TEOModuleServicer_to_server
 from module.module.src.integration import run_build_model
 
 dotenv.load_dotenv()
+PROJECT_PATH = str(Path.cwd())
 
 
 class TEOModule(TEOModuleServicer):
@@ -20,7 +23,8 @@ class TEOModule(TEOModuleServicer):
             "gis-module": jsonpickle.decode(request.gis_module),
             "cf-module": jsonpickle.decode(request.cf_module)
         }
-        result = run_build_model(input_data=input_dict)
+        with SimulationWrapper(project_path=PROJECT_PATH):
+            result = run_build_model(input_data=input_dict)
         return BuildModelOutput(
             Cost=json.dumps(result["Cost"]),
             AccumulatedNewCapacity=json.dumps(result["AccumulatedNewCapacity"]),
